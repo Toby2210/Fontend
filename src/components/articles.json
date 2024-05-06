@@ -1,0 +1,6 @@
+[
+ {"id": 3, "title":"hello article", "fullText":"some text here to fill the body"},
+ {"id": 4, "title":"another article", "fullText":"again here is some text here to fill"},
+ {"id": 2, "title":"coventry university", "fullText":"some news about coventry university"},
+ {"id": 5, "title":"smart campus", "fullText":"smart campus is coming to IVE"}
+]
