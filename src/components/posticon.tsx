@@ -3,7 +3,7 @@ import axios from 'axios';
 import { LikeOutlined,LikeFilled,HeartOutlined,HeartFilled} from '@ant-design/icons';
 import { getCurrentUser } from "../services/auth.service";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-
+import { api } from './common/http-common';
 function getIcon (theme:any, iconType:any) {
   let Icon:any;
 
@@ -54,7 +54,10 @@ function getIcon (theme:any, iconType:any) {
   {
     if(props.type=='like'&&currentUser.username!="undefined"){ 
     console.log(`logging like: ${currentUser.username} `)
-         return (axios.post(props.countLink, '', {
+      
+      const likeLink = `${api.uri}/articles/${props.id}/likes`
+      console.log(likeLink)
+         return (axios.post(likeLink, '', {
           headers: {
             'Authorization': `Basic ${localStorage.getItem('aToken')}`
           }
@@ -85,7 +88,10 @@ function getIcon (theme:any, iconType:any) {
   {
     if(props.type=='heart'&&currentUser.username!="undefined"){ 
       console.log(`logging fav: ${currentUser.username} password: ${currentUser.password}`)
-         return (axios.post(props.FavLink, '', {
+      
+      const favLink = `${api.uri}/articles/${props.id}/fav`
+      console.log(favLink)
+         return (axios.post(favLink, '', {
           headers: {
             'Authorization': `Basic ${localStorage.getItem('aToken')}`
           }
@@ -112,8 +118,8 @@ function getIcon (theme:any, iconType:any) {
 
   React.useEffect(()=>{
     if(props.type=='like'){
-      console.log("props.countLink ",props.countLink)
-     axios.get(props.countLink)
+      const likeLink = `${api.uri}/articles/${props.id}/likes`
+     axios.get(likeLink)
     .then((res)=>{
       console.log(' res ', res.data)
       setCount(res.data);

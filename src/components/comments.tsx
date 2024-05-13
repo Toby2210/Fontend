@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { getCurrentUser } from "../services/auth.service";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
-
+import { api } from './common/http-common';
 
 const DisplayComment = (props:any) => {    
 const [article_comments, setComments] = React.useState<any>([]);
@@ -24,7 +24,8 @@ if(currentUser){
   isAdmin=true}
  
   React.useEffect(()=>{
-  axios.get(props.msgLink)
+    const msgLink = `${api.uri}/articles/${props.id}/msg`
+  axios.get(msgLink)
     .then((res)=>{
       setComments(res.data);  
       console.log('no of msg ',article_comments.length)                    
@@ -43,8 +44,9 @@ const addComment:any =  (event:any)  => {
     if(event.target.value!=null){
       const raw ={"messagetxt": `${event.target.value}`}
         console.log('raw ', raw)
+      const msgLink = `${api.uri}/articles/${props.id}/msg`
       return(
-          axios.post(props.msgLink, raw, {
+          axios.post(msgLink, raw, {
             headers: {
               'Authorization': `Basic ${localStorage.getItem('aToken')}`
             }
@@ -73,7 +75,8 @@ Icon=DeleteFilled;
   console.log(' raw  ',raw)   
 
   if(raw!=undefined){
-   axios.delete(props.msgLink, {       
+    const msgLink = `${api.uri}/articles/${props.id}/msg`
+   axios.delete(msgLink, {       
     headers: {
         "Authorization": `Basic ${localStorage.getItem('aToken')}`
       },
