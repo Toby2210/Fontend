@@ -83,7 +83,9 @@ const FavCard = (props:any) => {
     setTheme('filled')
 // console.log('fav link arr ', fav.links.fav)
 // console.log('fav link ', fav)
-  axios.delete(fav.links.fav, {
+    const favLink = fav.links.fav.replace("http://","https://").replace("pike.replit.dev", "pike.replit.dev:3000")
+    console.log(`the link is : ${favLink}`)
+  axios.delete(favLink, {
        
         headers: {
             "Authorization": `Basic ${localStorage.getItem('aToken')}`
