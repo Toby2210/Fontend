@@ -8,6 +8,8 @@ import { api } from './common/http-common';
 import { getCurrentUser } from "../services/auth.service";
 const { Title } = Typography;
 const { TextArea } = Input;
+import { Select } from 'antd';
+const { Option } = Select;
 
 const EditForm: React.FC = (props: any) => {
   let navigate: NavigateFunction = useNavigate();
@@ -27,6 +29,7 @@ const EditForm: React.FC = (props: any) => {
     const s = values.summary;
     const d = values.description;
     const u = values.imageurl;
+    const l = values.location;
     const currentUser = getCurrentUser();
 
     // console.log('new article '+ t,a,s,d,u,currentUser.id);
@@ -36,6 +39,7 @@ const EditForm: React.FC = (props: any) => {
       summary: s,
       description: d,
       imageurl: u,
+      location: l,
       authorid: currentUser.id
     }
 
@@ -87,6 +91,13 @@ const EditForm: React.FC = (props: any) => {
           </Form.Item>
           <Form.Item name="description" label="Detail Description" >
             {props.isNew ? (<TextArea rows={2} />) : (<TextArea rows={2} defaultValue={!props.isNew && aa.description} />)}
+          </Form.Item>
+          <Form.Item name="location" label="Pet location" >
+            <Select defaultValue={props.isNew && aa.location} style={{ width: 200 }}>
+              <Option value="Mong Kok">Mong Kok</Option>
+              <Option value="Sha Tin">Sha Tin</Option>
+              <Option value="Chai Wan">Chai Wan</Option>
+            </Select>
           </Form.Item>
           <Form.Item name="imageurl" label="ImageURL" >
             {props.isNew ? (<Input />) : (<Input defaultValue={!props.isNew && aa.imageurl} />)}
