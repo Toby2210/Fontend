@@ -11,6 +11,24 @@ const { TextArea } = Input;
 import { Select } from 'antd';
 const { Option } = Select;
 
+const postToFacebook = (message) => {
+  const accessToken = 'EAAWojYpUNXABO75Es7kUl0tM1WK44HQC6zMZBZCb41cexort7HKOZBSrPX8s0rDMtNJgXl28pJWIn59ECDS2uznXhFdX6ZBYd6p4TIQysQTHSN2lMcTabNtGFKJ7EFDqyRKGcU7VckYecGSEsZCOYSy8VS9YHu9tZC3LX398UVL1cbBu48UnAl7pe3kCa8e7k1';
+  const apiEndpoint = `https://graph.facebook.com/me/feed`;
+
+  const postData = {
+    message: message,
+    access_token: accessToken
+  };
+
+  axios.post(apiEndpoint, postData)
+    .then(response => {
+      console.log('Message posted on Facebook:', response.data);
+    })
+    .catch(error => {
+      console.error('Failed to post message on Facebook:', error);
+    });
+};
+
 const EditForm: React.FC = (props: any) => {
   let navigate: NavigateFunction = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
@@ -60,6 +78,13 @@ const EditForm: React.FC = (props: any) => {
     }
     else {
       console.log(`path: ${api.uri}/articles`)
+      const message = `In ${l} has a new pet!\n
+      It's call ${t}!\n
+      Description: ${d}\n
+      Summary: ${s}\n
+      Image: ${u}\n
+      `;
+      postToFacebook(message);
       axios.post(`${api.uri}/articles`, postArticle, {
         headers: {
           'Authorization': `Basic ${localStorage.getItem('aToken')}`
