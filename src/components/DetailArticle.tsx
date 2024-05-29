@@ -19,21 +19,21 @@ const [loading, setLoading] = React.useState(true);
 const [theme, setTheme] = React.useState('outlined');
 
 React.useEffect(() => {
-  console.log(`path: ${api.uri}/articles/${aid}`)
-    axios.get(`${api.uri}/articles/${aid}`)
-      .then((res) => {
-      //  console.log('article' ,article)
-        setArticle(res.data);
-        localStorage.setItem('e',JSON.stringify(res.data))  
+  axios.get(`${api.uri}/articles/${aid}`)
+    .then((res) => {
+      setArticle(res.data);
+      localStorage.setItem('e', JSON.stringify(res.data));
+      setLoading(false);
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 404) {
         setLoading(false);
-      }).then(()=>{
-        setLoading(false);
-      })  
-      .catch((error) => {
-        console.log('Error fetching article details ')
-       // console.error('Error fetching article details:', error);
-      });
-  }, [aid]);
+        setArticle(null);
+      } else {
+        console.error('Error fetching article details:', error);
+      }
+    });
+}, [aid]);
   
   function getIcon (theme:string) {
     let Icon;
@@ -77,6 +77,9 @@ if(loading){
 const antIcon = <LoadingOutlined style={{ fontSize: 48}} spin />
 return(<Spin indicator={antIcon} />);
 }
+if (article === null) {
+  return <p>This pet information is deleted.</p>;
+}
 else {
 
   const Icon = getIcon(theme)
@@ -99,6 +102,8 @@ else {
                    <p>{article.summary}</p>
                    <h3>Detail Description</h3>
                    <p> {article.description}</p>
+                    <h3>Location</h3>
+                    <p>{article.location}</p>
                    <Button  
         type="primary"
         icon={<RollbackOutlined />}
