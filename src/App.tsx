@@ -15,6 +15,8 @@ import About from './components/About';
 import DetailArticle from './components/DetailArticle';
 import Profile from './components/Profile';
 import FavPage from './components/favpage';
+import GoogleLogin from './components/googleLogin';
+<Route path="/googleLogin" element={<GoogleLogin />} />
 import { LogoutOutlined, HomeOutlined,DashboardOutlined,InfoCircleOutlined,HeartFilled } from '@ant-design/icons';
 import Copyright from './components/Copyright';
 
@@ -90,6 +92,7 @@ export default function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/favpage" element={<FavPage />} />	
+          <Route path="/googleLogin" element={<GoogleLogin />} />
         </Routes>
       </Content>
       <Footer>
