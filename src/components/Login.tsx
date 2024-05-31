@@ -2,7 +2,7 @@ import 'antd/dist/reset.css';
 import React, { useState } from "react";
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Checkbox, Modal } from 'antd';
-import { LoginOutlined, UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoginOutlined, UserOutlined, LockOutlined ,GoogleOutlined} from '@ant-design/icons';
 import { login, register } from "../services/auth.service";
 
 import { gapi } from "gapi-script"
@@ -18,7 +18,8 @@ const Login: React.FC = () => {
   const [isShow, setIsShow] = React.useState(false);
 
   const handleGoogleSignIn = () => {
-    navigate("/googleLogin")
+    setIsShow(false); // Close the modal
+    navigate("/googleLogin");
   }
    
 
@@ -119,9 +120,9 @@ const Login: React.FC = () => {
             </Button>
             Or <a href="/register">register now!</a>
           </Form.Item>
-          <div id="google-signin-btn"><button onClick={handleGoogleSignIn}>Sign in with Google</button></div>
+          
         </Form>
-
+        <div id="google-signin-btn"><button onClick={handleGoogleSignIn}><GoogleOutlined />Sign in with Google</button></div>
 
       </Modal>
     </>

@@ -4,7 +4,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import UserT from "../types/user.type";
 import { Form, Input, Button } from 'antd';
 import { login, register } from "../services/auth.service";
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { UserOutlined, LockOutlined ,GoogleOutlined} from '@ant-design/icons';
 import { gapi } from "gapi-script"
 import { useEffect } from "react"
 
@@ -179,12 +179,13 @@ import { useEffect } from "react"
 
 
           </Form.Item>
-          <div id="google-signin-btn"><button>Sign in with Google</button></div>
+          
 
 
 
 
         </Form>
+        <div id="google-signin-btn"><button><GoogleOutlined />Sign in with Google</button></div>
 
 
       </>

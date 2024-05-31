@@ -38,8 +38,12 @@ const EditForm: React.FC = (props: any) => {
   // console.log("aa  ", aa)
   //console.log('aa.title ',aa.title)
   const contentRules = [
-    { required: true, message: 'Please input somethings' }
-  ]
+    { validator: (_, value) => value || value === 0 ? Promise.resolve() : Promise.reject('Please input something') }
+  ];
+
+  const goToHelper = () => {
+    window.open("/breedHelper")
+  }
 
   const handleFormSubmit = (values: any) => {
     const t = values.title;
@@ -48,6 +52,7 @@ const EditForm: React.FC = (props: any) => {
     const d = values.description;
     const u = values.imageurl;
     const l = values.location;
+    const b = values.breed;
     const currentUser = getCurrentUser();
 
     // console.log('new article '+ t,a,s,d,u,currentUser.id);
@@ -58,6 +63,7 @@ const EditForm: React.FC = (props: any) => {
       description: d,
       imageurl: u,
       location: l,
+      breed: b,
       authorid: currentUser.id
     }
 
@@ -78,12 +84,7 @@ const EditForm: React.FC = (props: any) => {
     }
     else {
       console.log(`path: ${api.uri}/articles`)
-      const message = `In ${l} has a new pet!\n
-      It's call ${t}!\n
-      Description: ${d}\n
-      Summary: ${s}\n
-      Image: ${u}\n
-      `;
+      const message = `In ${l} has a new pet!\nIt's a ${b} named ${t}!\nDescription: ${d}\nSummary: ${s}\nImage: ${u}\n`;
       postToFacebook(message);
       axios.post(`${api.uri}/articles`, postArticle, {
         headers: {
@@ -108,23 +109,27 @@ const EditForm: React.FC = (props: any) => {
           <Form.Item name="title" label="Title" rules={contentRules}>
             {props.isNew ? (<Input />) : (<Input defaultValue={!props.isNew && aa.title} />)}
           </Form.Item>
+          <Form.Item name="breed" label="Breed" rules={contentRules}>
+            {props.isNew ? (<TextArea rows={2} />) : (<TextArea rows={2} defaultValue={!props.isNew && aa.breed} />)}
+          </Form.Item>
+          <div><button onClick={goToHelper}>Breed Helper</button></div>
           <Form.Item name="alltext" label="About me" rules={contentRules}>
             {props.isNew ? (<TextArea rows={2} />) : (<TextArea rows={2} defaultValue={!props.isNew && aa.alltext} />)}
           </Form.Item>
-          <Form.Item name="summary" label="Summary" >
+          <Form.Item name="summary" label="Summary" rules={contentRules}>
             {props.isNew ? (<TextArea rows={2} />) : (<TextArea rows={2} defaultValue={!props.isNew && aa.summary} />)}
           </Form.Item>
-          <Form.Item name="description" label="Detail Description" >
+          <Form.Item name="description" label="Detail Description" rules={contentRules} >
             {props.isNew ? (<TextArea rows={2} />) : (<TextArea rows={2} defaultValue={!props.isNew && aa.description} />)}
           </Form.Item>
-          <Form.Item name="location" label="Pet location" >
+          <Form.Item name="location" label="Pet location" rules={contentRules} >
             <Select defaultValue={!props.isNew && aa.location} style={{ width: 200 }}>
               <Option value="Mong Kok">Mong Kok</Option>
               <Option value="Sha Tin">Sha Tin</Option>
               <Option value="Chai Wan">Chai Wan</Option>
             </Select>
           </Form.Item>
-          <Form.Item name="imageurl" label="ImageURL" >
+          <Form.Item name="imageurl" label="ImageURL" rules={contentRules} >
             {props.isNew ? (<Input />) : (<Input defaultValue={!props.isNew && aa.imageurl} />)}
           </Form.Item>
           <Form.Item>

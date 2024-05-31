@@ -52,6 +52,7 @@ const Article = () => {
             <Col span={8}>
               <Select defaultValue="title" style={{ width: '100%' }} onChange={handleFieldChange}>
                 <Option value="title">Title</Option>
+                <Option value="breed">Breed</Option>
                 <Option value="location">Location</Option>
                 <Option value="description">Description</Option>
                 <Option value="alltext">About me</Option>
@@ -70,7 +71,7 @@ const Article = () => {
           </Row>
           <Row gutter={[16, 16]} style={{ marginLeft: '15px' }}>
             {filteredArticles.length > 0 ? (
-              filteredArticles.map(({ id, title, imageurl, links, location , alltext, summary, description}) => (
+              filteredArticles.map(({ id, title, imageurl, links, location , alltext, summary, description, breed}) => (
                 <Col key={id}>
                   <Card
                     title={title}
@@ -83,6 +84,7 @@ const Article = () => {
                       <PostIcon type="heart" FavLink={links.fav} id={id} />,
                     ]}
                   >
+                    <p>Breed: {breed}</p>
                     <p>location: {location}</p>
                     <Link to={`/${id}`}>Details</Link>
                   </Card>

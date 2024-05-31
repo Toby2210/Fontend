@@ -17,7 +17,8 @@ import Profile from './components/Profile';
 import FavPage from './components/favpage';
 import GoogleLogin from './components/googleLogin';
 <Route path="/googleLogin" element={<GoogleLogin />} />
-import { LogoutOutlined, HomeOutlined,DashboardOutlined,InfoCircleOutlined,HeartFilled } from '@ant-design/icons';
+import BreedHelper from './components/breedHelper';
+import { LogoutOutlined, HomeOutlined,DashboardOutlined,InfoCircleOutlined,HeartFilled, EyeOutlined  } from '@ant-design/icons';
 import Copyright from './components/Copyright';
 
 const { Header, Content, Footer } = Layout;
@@ -58,7 +59,7 @@ export default function App() {
             />
             </Link>   
           <Link to="/"><HomeOutlined style={{ fontSize: '32px', }} /></Link>
-            <Link to="/dashboard"><DashboardOutlined style={{ fontSize: '32px', }}/></Link>
+            <Link to="/breedHelper"><EyeOutlined  style={{ fontSize: '32px', }}/></Link>
           <Link to="/about"><InfoCircleOutlined style={{ fontSize: '32px', }}/></Link>
           
           </Space></div>
@@ -93,6 +94,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/favpage" element={<FavPage />} />	
           <Route path="/googleLogin" element={<GoogleLogin />} />
+          <Route path="/breedhelper" element={<BreedHelper />} />
         </Routes>
       </Content>
       <Footer>
