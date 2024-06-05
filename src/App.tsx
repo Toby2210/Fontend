@@ -18,6 +18,7 @@ import FavPage from './components/favpage';
 import GoogleLogin from './components/googleLogin';
 <Route path="/googleLogin" element={<GoogleLogin />} />
 import BreedHelper from './components/breedHelper';
+import ForgotPassword from './components/forgotPassword';
 import { LogoutOutlined, HomeOutlined,DashboardOutlined,InfoCircleOutlined,HeartFilled, EyeOutlined  } from '@ant-design/icons';
 import Copyright from './components/Copyright';
 
@@ -95,6 +96,7 @@ export default function App() {
           <Route path="/favpage" element={<FavPage />} />	
           <Route path="/googleLogin" element={<GoogleLogin />} />
           <Route path="/breedhelper" element={<BreedHelper />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
         </Routes>
       </Content>
       <Footer>

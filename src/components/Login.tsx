@@ -58,6 +58,10 @@ const Login: React.FC = () => {
       )
 
   }
+  const forgotPassword = () => {
+    setIsShow(false); // Close the modal
+    navigate("/forgotPassword");
+  }
 
 
 
@@ -109,7 +113,7 @@ const Login: React.FC = () => {
               <Checkbox>Remember me</Checkbox>
             </Form.Item>
 
-            <a className="login-form-forgot" href="">
+            <a className="login-form-forgot" onClick={forgotPassword}>
               Forgot password
             </a>
           </Form.Item>
